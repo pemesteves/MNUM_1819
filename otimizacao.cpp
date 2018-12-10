@@ -33,17 +33,33 @@ void regraAurea(double x1, double x2, bool maximo) {
 		}
 	}
 
-	if (maximo)
+	double result;
+
+	if (maximo) {
 		cout << "Maximo: ";
-	else
+		if (f(x3) <= f(x4))
+			result = x3;
+		else if (f(x3) > f(x4))
+			result = x4;
+	}
+	else {
 		cout << "Minimo: ";
 
-	cout << (x1 + x2) / 2 << endl;
+		if (f(x3) <= f(x4))
+			result = x4;
+		else if (f(x3) > f(x4))
+			result = x3;
+	}
+	cout << result << endl;
 }
 
 
 inline double f(double x, double y) {
 	return pow(y, 2) - 2 * x*y - 6 * y + 2 * pow(x, 2) + 12;
+}
+
+inline double f1(double x, double y) {
+	return (2 * x*y + 2 * x - pow(x, 2) - 2 * pow(y, 2));
 }
 
 void metodoDoGradiente(double x, double y, double h, bool maximo) {
@@ -65,21 +81,23 @@ void metodoDoGradiente(double x, double y, double h, bool maximo) {
 				break;
 		}
 		else {
-			xn = x + h * (-2 * y + 4 * x);
-			yn = y + h * (2 * y - 2 * x - 6);
-			if (f(xn, yn) < f(x, y))
+			xn = x + h * (2 * y + 2 - 2 * x);
+			yn = y + h * (2 * x - 2 * y);
+			if (f1(xn, yn) < f1(x, y))
 				h /= 2;
-			else if (f(xn, yn) > f(x, y))
+			else if (f1(xn, yn) > f1(x, y))
 				h *= 2;
 			else
 				break;
 		}
 	} while (abs(xn - x) >= pow(10, -3) || abs(yn - y) >= pow(10, -3));
 
-	if (maximo)
+	if (maximo) {
 		cout << "Maximo: ";
-	else
+	}
+	else {
 		cout << "Minimo: ";
+	}
 
 	cout << (xn + x) / 2 << "; " << (yn + y) / 2 << endl;
 }
@@ -87,7 +105,11 @@ void metodoDoGradiente(double x, double y, double h, bool maximo) {
 void metodoDaQuadrica(double x, double y, bool maximo) {
 	//gradiente: -2*y+4*x; 2*y-2*x-6
 	double xn = x, yn = y;
-	double H = 1 / 4; //Inverso do determinante da matriz hessiana
+	double H;
+	if (maximo)
+		H = (double)1 / 4;
+	else
+		H = (double)1 / 12; //Inverso do determinante da matriz hessiana
 
 	do {
 		x = xn; y = yn;
@@ -96,8 +118,8 @@ void metodoDaQuadrica(double x, double y, bool maximo) {
 			yn = y - H * (2 * y - 2 * x - 6);
 		}
 		else {
-			xn = x + H * (-2 * y + 4 * x);
-			yn = y + H * (2 * y - 2 * x - 6);
+			xn = x + H * (2 * y + 2 - 2 * x);
+			yn = y + H * (2 * x - 4 * y);
 		}
 	} while (abs(xn - x) >= pow(10, -3) || abs(yn - y) >= pow(10, -3));
 
