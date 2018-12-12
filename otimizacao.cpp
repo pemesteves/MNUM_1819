@@ -37,17 +37,17 @@ void regraAurea(double x1, double x2, bool maximo) {
 
 	if (maximo) {
 		cout << "Maximo: ";
-		if (f(x3) <= f(x4))
+		if (f(x3) >= f(x4))
 			result = x3;
-		else if (f(x3) > f(x4))
+		else if (f(x3) < f(x4))
 			result = x4;
 	}
 	else {
 		cout << "Minimo: ";
 
-		if (f(x3) <= f(x4))
+		if (f(x3) >= f(x4))
 			result = x4;
-		else if (f(x3) > f(x4))
+		else if (f(x3) < f(x4))
 			result = x3;
 	}
 	cout << result << endl;
@@ -134,10 +134,10 @@ void metodoDaQuadrica(double x, double y, bool maximo) {
 int main() {
 	regraAurea(-1, 0, false);
 	regraAurea(-1, 0, true);
-
+	system("pause");
 	metodoDoGradiente(1, 1, 1, false);
 	metodoDoGradiente(1, 1, 1, true);
-
+	system("pause");
 	metodoDaQuadrica(1, 1, false);
 	metodoDaQuadrica(1, 1, true);
 	return 0;
