@@ -8,6 +8,28 @@ inline double f(double x) {
 	return (pow(2 * x + 1, 2) - 5 * cos(10 * x));
 }
 
+void tercos(double x1, double x2) {
+	double x3 = 0, x4 = 0;
+	while (abs(x2 - x1) >= pow(10, -3)) {
+		x3 = x1 + (x2 - x1) / 3;
+		x4 = x1 + 2 * (x2 - x1) / 3;
+
+		if (f(x4) < f(x3))
+			x1 = x3;
+		else if (f(x4) > f(x3))
+			x2 = x4;
+		else
+			break;
+	}
+	double result = 0;
+	if (f(x3) < f(x4))
+		result = x4;
+	else 
+		result = x3;
+
+	cout << "Tercos: " << result << endl;
+}
+
 void regraAurea(double x1, double x2, bool maximo) {
 	double x3, x4;
 	double B = (sqrt(5) - 1) / 2;
@@ -33,7 +55,7 @@ void regraAurea(double x1, double x2, bool maximo) {
 		}
 	}
 
-	double result;
+	double result; 
 
 	if (maximo) {
 		cout << "Maximo: ";
@@ -132,6 +154,8 @@ void metodoDaQuadrica(double x, double y, bool maximo) {
 }
 
 int main() {
+	tercos(-1, 0);
+	system("pause");
 	regraAurea(-1, 0, false);
 	regraAurea(-1, 0, true);
 	system("pause");
