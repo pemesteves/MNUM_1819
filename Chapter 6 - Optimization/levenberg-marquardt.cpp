@@ -35,7 +35,7 @@ inline double hessian1(double x, double y) {
 	return -1.0 / (200 * cos(10 * x) - 4);
 }
 
-void lavembergMarquardt(double x, double y, double step, int tol, double f(double, double), double gradient_x(double, double), double gradient_y(double, double), double hessian(double, double)) {
+void levenbergMarquardt(double x, double y, double step, int tol, double f(double, double), double gradient_x(double, double), double gradient_y(double, double), double hessian(double, double)) {
 	double xn = x, yn = y;
 	double hLM_x = 0, hLM_y = 0;
 	do {
