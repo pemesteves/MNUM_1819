@@ -10,4 +10,4 @@ Some numerical methods programmed in C++ for Numerical Methods curricular unit, 
 
 * **Pedro Esteves** - [pemesteves](https://github.com/pemesteves) 
 
-### **Final Grade:** ?
+### **Final Grade:** 18
